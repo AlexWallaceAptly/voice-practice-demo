@@ -18,6 +18,7 @@ import {
 } from '../content/loadQuestions'
 import type { Question } from '../core/types'
 import { useQuestions } from '../hooks/useQuestions'
+import { assetUrl } from '../lib/assetUrl'
 
 type Phase = 'idle' | 'question' | 'gap' | 'answer' | 'done'
 
@@ -161,10 +162,7 @@ export function Listen() {
 
       const next = sessionRef.current[i + 1]
       if (next) {
-        const path = next.questionAudio.startsWith('/')
-          ? next.questionAudio
-          : `/${next.questionAudio}`
-        player.preload(path)
+        player.preload(assetUrl(next.questionAudio))
       }
 
       try {

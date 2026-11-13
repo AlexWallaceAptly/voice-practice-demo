@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && npm run postbuild:spa",
+    "build:pages": "tsc -b && GITHUB_REPOSITORY=${GITHUB_REPOSITORY:-AlexWallaceAptly/voice-practice-demo} vite build && npm run postbuild:spa",
+    "postbuild:spa": "cp dist/index.html dist/404.html",
     "lint": "oxlint src",
     "preview": "vite preview",
     "test": "vitest run",

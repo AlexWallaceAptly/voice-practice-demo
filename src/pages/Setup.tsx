@@ -4,6 +4,7 @@ import { BackLink } from '../components/BackLink'
 import { useQuestions } from '../hooks/useQuestions'
 import { resolveDefaultEngine, getEngineById, allEngines } from '../engines'
 import { setOfflineReady, setPreferredEngine, loadPreferredEngine } from '../lib/storage'
+import { assetUrl } from '../lib/assetUrl'
 import { useDevMode } from '../hooks/useDevMode'
 
 type StepStatus = 'idle' | 'running' | 'done' | 'error'
@@ -15,12 +16,14 @@ async function cacheAudioFiles(
   const cache = await caches.open('audio-cache')
   let done = 0
   for (const url of urls) {
-    const absolute = url.startsWith('/') ? url : `/${url}`
+    const absolute = assetUrl(url)
     try {
       const existing = await cache.match(absolute)
       if (!existing) {
         const res = await fetch(absolute)
-        if (res.ok) {
+        const type = res.headers.get('content-type') ?? ''
+        // Skip SPA HTML fallbacks for missing studio audio
+        if (res.ok && !type.includes('text/html')) {
           await cache.put(absolute, res.clone())
         }
       }

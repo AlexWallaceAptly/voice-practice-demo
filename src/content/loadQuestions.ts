@@ -1,8 +1,9 @@
 import type { Question } from '../core/types'
+import { assetUrl } from '../lib/assetUrl'
 import { QuestionsSchema } from './schema'
 
 export async function loadQuestions(
-  url = '/content/questions.json',
+  url = assetUrl('content/questions.json'),
 ): Promise<Question[]> {
   const res = await fetch(url)
   if (!res.ok) {

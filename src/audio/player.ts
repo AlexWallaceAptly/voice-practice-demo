@@ -1,3 +1,5 @@
+import { assetUrl } from '../lib/assetUrl'
+
 export type PlaybackSpeed = 0.75 | 1 | 1.25
 
 export interface PlayOptions {
@@ -188,7 +190,7 @@ export async function playQuestionOrPlaceholder(
   promptText: string,
   onPlaceholder?: () => void,
 ): Promise<void> {
-  const url = audioPath.startsWith('/') ? audioPath : `/${audioPath}`
+  const url = assetUrl(audioPath)
   try {
     await player.playUrl(url)
   } catch (err) {

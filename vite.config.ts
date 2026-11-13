@@ -4,7 +4,24 @@ import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
+/**
+ * GitHub Pages project sites live at /<repo>/.
+ * Local/dev and user/org root pages use /.
+ * Override with VITE_BASE if needed.
+ */
+function resolveBase(): string {
+  if (process.env.VITE_BASE) return process.env.VITE_BASE
+  if (process.env.GITHUB_REPOSITORY) {
+    const repo = process.env.GITHUB_REPOSITORY.split('/')[1]
+    if (repo) return `/${repo}/`
+  }
+  return '/'
+}
+
+const base = resolveBase()
+
 export default defineConfig({
+  base,
   plugins: [
     react(),
     tailwindcss(),
@@ -19,10 +36,11 @@ export default defineConfig({
         theme_color: '#1e3a5f',
         background_color: '#f8fafc',
         display: 'standalone',
-        start_url: '/',
+        start_url: base,
+        scope: base,
         icons: [
           {
-            src: '/favicon.svg',
+            src: 'favicon.svg',
             sizes: 'any',
             type: 'image/svg+xml',
             purpose: 'any maskable',
@@ -31,9 +49,10 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,svg,woff2,json}'],
+        navigateFallback: 'index.html',
         runtimeCaching: [
           {
-            urlPattern: ({ url }) => url.pathname.startsWith('/audio/'),
+            urlPattern: ({ url }) => url.pathname.includes('/audio/'),
             handler: 'CacheFirst',
             options: {
               cacheName: 'audio-cache',

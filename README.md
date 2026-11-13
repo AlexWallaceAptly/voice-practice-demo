@@ -18,6 +18,20 @@ npm test
 
 Open `http://localhost:5173`. Use Chrome 139+ for on-device Web Speech; Whisper is the cross-browser fallback. Add `?dev=1` for the engine picker.
 
+## GitHub Pages
+
+Pushing to `main` runs [.github/workflows/deploy-pages.yml](.github/workflows/deploy-pages.yml), which builds with `base: /<repo>/` and deploys to GitHub Pages.
+
+1. In the repo: **Settings → Pages → Build and deployment → Source: GitHub Actions**
+2. After the workflow succeeds, open `https://<owner>.github.io/<repo>/`
+
+Local preview of the Pages build:
+
+```bash
+GITHUB_REPOSITORY=AlexWallaceAptly/voice-practice-demo npm run build
+npx vite preview
+```
+
 ## Content
 
 - Questions: `public/content/questions.json`
