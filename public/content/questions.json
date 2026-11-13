@@ -1,0 +1,88 @@
+[
+  {
+    "id": "supreme-law",
+    "category": "Government",
+    "prompt": "What is the supreme law of the land?",
+    "questionAudio": "audio/q/supreme-law.m4a",
+    "answerAudio": "audio/a/supreme-law.m4a",
+    "answerMode": "any",
+    "acceptedAnswers": [
+      {
+        "display": "the Constitution",
+        "variants": [
+          "constitution",
+          "the constitution",
+          "us constitution",
+          "united states constitution"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "capital",
+    "category": "Geography",
+    "prompt": "What is the capital of the United States?",
+    "questionAudio": "audio/q/capital.m4a",
+    "answerAudio": "audio/a/capital.m4a",
+    "answerMode": "any",
+    "acceptedAnswers": [
+      {
+        "display": "Washington, D.C.",
+        "variants": ["washington dc", "washington d c", "washington", "dc"]
+      }
+    ]
+  },
+  {
+    "id": "amendments",
+    "category": "Government",
+    "prompt": "How many amendments does the Constitution have?",
+    "questionAudio": "audio/q/amendments.m4a",
+    "answerAudio": "audio/a/amendments.m4a",
+    "answerMode": "any",
+    "acceptedAnswers": [
+      {
+        "display": "twenty-seven (27)",
+        "variants": ["27", "twenty seven", "twenty-seven"]
+      }
+    ]
+  },
+  {
+    "id": "branches-two",
+    "category": "Government",
+    "prompt": "Name two branches of government.",
+    "questionAudio": "audio/q/branches-two.m4a",
+    "answerAudio": "audio/a/branches-two.m4a",
+    "answerMode": "count",
+    "requiredCount": 2,
+    "acceptedAnswers": [
+      {
+        "display": "Congress (legislative)",
+        "variants": ["congress", "legislative", "legislature"]
+      },
+      {
+        "display": "the President (executive)",
+        "variants": ["president", "executive"]
+      },
+      {
+        "display": "the courts (judicial)",
+        "variants": ["courts", "judicial", "supreme court", "judiciary"]
+      }
+    ]
+  },
+  {
+    "id": "president",
+    "category": "Government",
+    "prompt": "Who is the President of the United States now?",
+    "questionAudio": "audio/q/president.m4a",
+    "answerAudio": "audio/a/president.m4a",
+    "answerMode": "any",
+    "dynamic": true,
+    "notes": "Officeholder-dependent; excluded from Mock Interview by default.",
+    "acceptedAnswers": [
+      {
+        "display": "(current officeholder)",
+        "variants": ["president", "the president"]
+      }
+    ]
+  }
+]
