@@ -1,0 +1,15 @@
+id,role,source_file,notes
+form-of-government,question,01_question.wav,paired correctly in split index
+form-of-government,answer,01_answer.wav,
+supreme-law,question,02_question.wav,
+supreme-law,answer,02_answer.wav,
+constitution-does,question,03_question.wav,
+constitution-does,answer,03_answer.wav,
+we-the-people,question,04_question.wav,
+we-the-people,answer,04_answer.wav,
+amendments-how,question,05_answer.wav,split labels were swapped; remapped by transcript
+amendments-how,answer,06_question.wav,
+bill-of-rights-protects,question,06_answer.wav,split labels were swapped; remapped by transcript
+bill-of-rights-protects,answer,07_question.wav,
+amendments-count,question,07_answer.wav,split labels were swapped; remapped by transcript
+amendments-count,answer,08_question.wav,

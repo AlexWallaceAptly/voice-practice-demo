@@ -1,5 +1,26 @@
 [
   {
+    "id": "form-of-government",
+    "category": "Government",
+    "prompt": "What is the form of government of the United States?",
+    "questionAudio": "audio/q/form-of-government.m4a",
+    "answerAudio": "audio/a/form-of-government.m4a",
+    "answerMode": "any",
+    "acceptedAnswers": [
+      {
+        "display": "Republic",
+        "variants": [
+          "republic",
+          "a republic",
+          "constitution based federal republic",
+          "constitution-based federal republic",
+          "federal republic",
+          "representative democracy"
+        ]
+      }
+    ]
+  },
+  {
     "id": "supreme-law",
     "category": "Government",
     "prompt": "What is the supreme law of the land?",
@@ -13,555 +34,124 @@
           "constitution",
           "the constitution",
           "us constitution",
-          "united states constitution"
+          "united states constitution",
+          "the united states constitution"
         ]
       }
     ]
   },
   {
-    "id": "capital",
-    "category": "Geography",
-    "prompt": "What is the capital of the United States?",
-    "questionAudio": "audio/q/capital.m4a",
-    "answerAudio": "audio/a/capital.m4a",
+    "id": "constitution-does",
+    "category": "Government",
+    "prompt": "Name one thing the U.S. Constitution does.",
+    "questionAudio": "audio/q/constitution-does.m4a",
+    "answerAudio": "audio/a/constitution-does.m4a",
     "answerMode": "any",
     "acceptedAnswers": [
       {
-        "display": "Washington, D.C.",
-        "variants": ["washington dc", "washington d c", "washington", "dc"]
+        "display": "forms the government",
+        "variants": ["forms the government", "form the government", "creates the government"]
+      },
+      {
+        "display": "defines powers of government",
+        "variants": [
+          "defines powers of government",
+          "defines the powers of government",
+          "defines powers"
+        ]
+      },
+      {
+        "display": "defines the parts of government",
+        "variants": [
+          "defines the parts of government",
+          "defines parts of government",
+          "defines the parts"
+        ]
+      },
+      {
+        "display": "protects the rights of the people",
+        "variants": [
+          "protects the rights of the people",
+          "protects rights",
+          "protects the rights of people"
+        ]
       }
     ]
   },
   {
-    "id": "amendments",
+    "id": "we-the-people",
+    "category": "Principles",
+    "prompt": "The U.S. Constitution starts with the words “We the People.” What does “We the People” mean?",
+    "questionAudio": "audio/q/we-the-people.m4a",
+    "answerAudio": "audio/a/we-the-people.m4a",
+    "answerMode": "any",
+    "acceptedAnswers": [
+      {
+        "display": "self-government",
+        "variants": [
+          "self government",
+          "self-government",
+          "people should govern themselves",
+          "popular sovereignty",
+          "consent of the governed",
+          "social contract",
+          "a social contract"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "amendments-how",
     "category": "Government",
-    "prompt": "How many amendments does the Constitution have?",
-    "questionAudio": "audio/q/amendments.m4a",
-    "answerAudio": "audio/a/amendments.m4a",
+    "prompt": "How are changes made to the U.S. Constitution?",
+    "questionAudio": "audio/q/amendments-how.m4a",
+    "answerAudio": "audio/a/amendments-how.m4a",
+    "answerMode": "any",
+    "acceptedAnswers": [
+      {
+        "display": "Amendments",
+        "variants": [
+          "amendment",
+          "amendments",
+          "the amendment process",
+          "through amendments"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bill-of-rights-protects",
+    "category": "Rights",
+    "prompt": "What does the Bill of Rights protect?",
+    "questionAudio": "audio/q/bill-of-rights-protects.m4a",
+    "answerAudio": "audio/a/bill-of-rights-protects.m4a",
+    "answerMode": "any",
+    "acceptedAnswers": [
+      {
+        "display": "the basic rights of Americans",
+        "variants": [
+          "basic rights of americans",
+          "the basic rights of americans",
+          "basic rights of people living in the united states",
+          "the basic rights of people living in the united states",
+          "basic rights",
+          "rights of americans",
+          "the rights of the people"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "amendments-count",
+    "category": "Government",
+    "prompt": "How many amendments does the U.S. Constitution have?",
+    "questionAudio": "audio/q/amendments-count.m4a",
+    "answerAudio": "audio/a/amendments-count.m4a",
     "answerMode": "any",
     "acceptedAnswers": [
       {
         "display": "twenty-seven (27)",
         "variants": ["27", "twenty seven", "twenty-seven"]
-      }
-    ]
-  },
-  {
-    "id": "branches-two",
-    "category": "Government",
-    "prompt": "Name two branches of government.",
-    "questionAudio": "audio/q/branches-two.m4a",
-    "answerAudio": "audio/a/branches-two.m4a",
-    "answerMode": "count",
-    "requiredCount": 2,
-    "acceptedAnswers": [
-      {
-        "display": "Congress (legislative)",
-        "variants": ["congress", "legislative", "legislature"]
-      },
-      {
-        "display": "the President (executive)",
-        "variants": ["president", "executive"]
-      },
-      {
-        "display": "the courts (judicial)",
-        "variants": ["courts", "judicial", "supreme court", "judiciary"]
-      }
-    ]
-  },
-  {
-    "id": "president",
-    "category": "Government",
-    "prompt": "Who is the President of the United States now?",
-    "questionAudio": "audio/q/president.m4a",
-    "answerAudio": "audio/a/president.m4a",
-    "answerMode": "any",
-    "dynamic": true,
-    "notes": "Officeholder-dependent; excluded from Mock Interview by default.",
-    "acceptedAnswers": [
-      {
-        "display": "(current officeholder)",
-        "variants": ["president", "the president"]
-      }
-    ]
-  },
-  {
-    "id": "bill-of-rights",
-    "category": "Rights",
-    "prompt": "What do we call the first ten amendments to the Constitution?",
-    "questionAudio": "audio/q/bill-of-rights.m4a",
-    "answerAudio": "audio/a/bill-of-rights.m4a",
-    "answerMode": "any",
-    "acceptedAnswers": [
-      {
-        "display": "the Bill of Rights",
-        "variants": ["bill of rights", "the bill of rights"]
-      }
-    ]
-  },
-  {
-    "id": "speech-freedom",
-    "category": "Rights",
-    "prompt": "What is one right or freedom from the First Amendment?",
-    "questionAudio": "audio/q/speech-freedom.m4a",
-    "answerAudio": "audio/a/speech-freedom.m4a",
-    "answerMode": "any",
-    "acceptedAnswers": [
-      {
-        "display": "speech",
-        "variants": ["speech", "freedom of speech", "free speech"]
-      },
-      {
-        "display": "religion",
-        "variants": ["religion", "freedom of religion", "free religion"]
-      },
-      {
-        "display": "assembly",
-        "variants": ["assembly", "freedom of assembly", "right to assemble"]
-      },
-      {
-        "display": "press",
-        "variants": ["press", "freedom of the press", "free press"]
-      },
-      {
-        "display": "petition the government",
-        "variants": ["petition", "petition the government", "right to petition"]
-      }
-    ]
-  },
-  {
-    "id": "declaration",
-    "category": "History",
-    "prompt": "What did the Declaration of Independence do?",
-    "questionAudio": "audio/q/declaration.m4a",
-    "answerAudio": "audio/a/declaration.m4a",
-    "answerMode": "any",
-    "acceptedAnswers": [
-      {
-        "display": "announced our independence from Great Britain",
-        "variants": [
-          "announced independence",
-          "declared independence",
-          "declared our independence",
-          "said that the united states is free",
-          "independence from britain",
-          "independence from great britain",
-          "independence from england"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "independence-day",
-    "category": "History",
-    "prompt": "When do we celebrate Independence Day?",
-    "questionAudio": "audio/q/independence-day.m4a",
-    "answerAudio": "audio/a/independence-day.m4a",
-    "answerMode": "any",
-    "acceptedAnswers": [
-      {
-        "display": "July 4",
-        "variants": [
-          "july 4",
-          "july fourth",
-          "july 4th",
-          "the fourth of july",
-          "4th of july",
-          "4 of july"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "congress-makes-laws",
-    "category": "Government",
-    "prompt": "Who makes federal laws?",
-    "questionAudio": "audio/q/congress-makes-laws.m4a",
-    "answerAudio": "audio/a/congress-makes-laws.m4a",
-    "answerMode": "any",
-    "acceptedAnswers": [
-      {
-        "display": "Congress",
-        "variants": [
-          "congress",
-          "the congress",
-          "senate and house",
-          "the senate and house of representatives",
-          "us legislature",
-          "legislature"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "senators-number",
-    "category": "Government",
-    "prompt": "How many U.S. Senators are there?",
-    "questionAudio": "audio/q/senators-number.m4a",
-    "answerAudio": "audio/a/senators-number.m4a",
-    "answerMode": "any",
-    "acceptedAnswers": [
-      {
-        "display": "one hundred (100)",
-        "variants": ["100", "one hundred", "a hundred", "hundred"]
-      }
-    ]
-  },
-  {
-    "id": "senator-term",
-    "category": "Government",
-    "prompt": "We elect a U.S. Senator for how many years?",
-    "questionAudio": "audio/q/senator-term.m4a",
-    "answerAudio": "audio/a/senator-term.m4a",
-    "answerMode": "any",
-    "acceptedAnswers": [
-      {
-        "display": "six (6)",
-        "variants": ["6", "six", "six years"]
-      }
-    ]
-  },
-  {
-    "id": "house-term",
-    "category": "Government",
-    "prompt": "We elect a U.S. Representative for how many years?",
-    "questionAudio": "audio/q/house-term.m4a",
-    "answerAudio": "audio/a/house-term.m4a",
-    "answerMode": "any",
-    "acceptedAnswers": [
-      {
-        "display": "two (2)",
-        "variants": ["2", "two", "two years"]
-      }
-    ]
-  },
-  {
-    "id": "president-term",
-    "category": "Government",
-    "prompt": "We elect a President for how many years?",
-    "questionAudio": "audio/q/president-term.m4a",
-    "answerAudio": "audio/a/president-term.m4a",
-    "answerMode": "any",
-    "acceptedAnswers": [
-      {
-        "display": "four (4)",
-        "variants": ["4", "four", "four years"]
-      }
-    ]
-  },
-  {
-    "id": "commander-in-chief",
-    "category": "Government",
-    "prompt": "Who is the Commander in Chief of the military?",
-    "questionAudio": "audio/q/commander-in-chief.m4a",
-    "answerAudio": "audio/a/commander-in-chief.m4a",
-    "answerMode": "any",
-    "acceptedAnswers": [
-      {
-        "display": "the President",
-        "variants": ["president", "the president"]
-      }
-    ]
-  },
-  {
-    "id": "veto",
-    "category": "Government",
-    "prompt": "Who vetoes bills?",
-    "questionAudio": "audio/q/veto.m4a",
-    "answerAudio": "audio/a/veto.m4a",
-    "answerMode": "any",
-    "acceptedAnswers": [
-      {
-        "display": "the President",
-        "variants": ["president", "the president"]
-      }
-    ]
-  },
-  {
-    "id": "highest-court",
-    "category": "Government",
-    "prompt": "What is the highest court in the United States?",
-    "questionAudio": "audio/q/highest-court.m4a",
-    "answerAudio": "audio/a/highest-court.m4a",
-    "answerMode": "any",
-    "acceptedAnswers": [
-      {
-        "display": "the Supreme Court",
-        "variants": ["supreme court", "the supreme court"]
-      }
-    ]
-  },
-  {
-    "id": "justices-number",
-    "category": "Government",
-    "prompt": "How many justices are on the Supreme Court?",
-    "questionAudio": "audio/q/justices-number.m4a",
-    "answerAudio": "audio/a/justices-number.m4a",
-    "answerMode": "any",
-    "acceptedAnswers": [
-      {
-        "display": "nine (9)",
-        "variants": ["9", "nine"]
-      }
-    ]
-  },
-  {
-    "id": "rule-of-law",
-    "category": "Principles",
-    "prompt": "What is the “rule of law”?",
-    "questionAudio": "audio/q/rule-of-law.m4a",
-    "answerAudio": "audio/a/rule-of-law.m4a",
-    "answerMode": "any",
-    "acceptedAnswers": [
-      {
-        "display": "Everyone must follow the law",
-        "variants": [
-          "everyone must follow the law",
-          "leaders must obey the law",
-          "government must obey the law",
-          "no one is above the law"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "ocean-east",
-    "category": "Geography",
-    "prompt": "What ocean is on the East Coast of the United States?",
-    "questionAudio": "audio/q/ocean-east.m4a",
-    "answerAudio": "audio/a/ocean-east.m4a",
-    "answerMode": "any",
-    "acceptedAnswers": [
-      {
-        "display": "Atlantic (Ocean)",
-        "variants": ["atlantic", "atlantic ocean", "the atlantic"]
-      }
-    ]
-  },
-  {
-    "id": "ocean-west",
-    "category": "Geography",
-    "prompt": "What ocean is on the West Coast of the United States?",
-    "questionAudio": "audio/q/ocean-west.m4a",
-    "answerAudio": "audio/a/ocean-west.m4a",
-    "answerMode": "any",
-    "acceptedAnswers": [
-      {
-        "display": "Pacific (Ocean)",
-        "variants": ["pacific", "pacific ocean", "the pacific"]
-      }
-    ]
-  },
-  {
-    "id": "statue-of-liberty",
-    "category": "Geography",
-    "prompt": "Where is the Statue of Liberty?",
-    "questionAudio": "audio/q/statue-of-liberty.m4a",
-    "answerAudio": "audio/a/statue-of-liberty.m4a",
-    "answerMode": "any",
-    "acceptedAnswers": [
-      {
-        "display": "New York (Harbor) / Liberty Island",
-        "variants": [
-          "new york",
-          "new york harbor",
-          "new york city",
-          "liberty island",
-          "nyc",
-          "new jersey"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "stars-stripes",
-    "category": "Symbols",
-    "prompt": "Why does the flag have 13 stripes?",
-    "questionAudio": "audio/q/stars-stripes.m4a",
-    "answerAudio": "audio/a/stars-stripes.m4a",
-    "answerMode": "any",
-    "acceptedAnswers": [
-      {
-        "display": "because there were 13 original colonies",
-        "variants": [
-          "13 original colonies",
-          "thirteen original colonies",
-          "original colonies",
-          "thirteen colonies",
-          "13 colonies"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "stars-states",
-    "category": "Symbols",
-    "prompt": "Why does the flag have 50 stars?",
-    "questionAudio": "audio/q/stars-states.m4a",
-    "answerAudio": "audio/a/stars-states.m4a",
-    "answerMode": "any",
-    "acceptedAnswers": [
-      {
-        "display": "because there is one star for each state",
-        "variants": [
-          "50 states",
-          "fifty states",
-          "one for each state",
-          "one star for each state",
-          "there are 50 states"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "national-anthem",
-    "category": "Symbols",
-    "prompt": "What is the name of the national anthem?",
-    "questionAudio": "audio/q/national-anthem.m4a",
-    "answerAudio": "audio/a/national-anthem.m4a",
-    "answerMode": "any",
-    "acceptedAnswers": [
-      {
-        "display": "The Star-Spangled Banner",
-        "variants": [
-          "star spangled banner",
-          "the star spangled banner",
-          "star-spangled banner"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "pledge",
-    "category": "Principles",
-    "prompt": "What do we show loyalty to when we say the Pledge of Allegiance?",
-    "questionAudio": "audio/q/pledge.m4a",
-    "answerAudio": "audio/a/pledge.m4a",
-    "answerMode": "any",
-    "acceptedAnswers": [
-      {
-        "display": "the United States / the flag",
-        "variants": [
-          "united states",
-          "the united states",
-          "usa",
-          "america",
-          "the flag",
-          "flag",
-          "united states of america"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "voting-age",
-    "category": "Rights",
-    "prompt": "How old do citizens have to be to vote for President?",
-    "questionAudio": "audio/q/voting-age.m4a",
-    "answerAudio": "audio/a/voting-age.m4a",
-    "answerMode": "any",
-    "acceptedAnswers": [
-      {
-        "display": "eighteen (18) and older",
-        "variants": ["18", "eighteen", "18 years", "eighteen years old"]
-      }
-    ]
-  },
-  {
-    "id": "father-of-country",
-    "category": "History",
-    "prompt": "Who is the “Father of Our Country”?",
-    "questionAudio": "audio/q/father-of-country.m4a",
-    "answerAudio": "audio/a/father-of-country.m4a",
-    "answerMode": "any",
-    "acceptedAnswers": [
-      {
-        "display": "George Washington",
-        "variants": [
-          "washington",
-          "george washington",
-          "president washington"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "first-president",
-    "category": "History",
-    "prompt": "Who was the first President?",
-    "questionAudio": "audio/q/first-president.m4a",
-    "answerAudio": "audio/a/first-president.m4a",
-    "answerMode": "any",
-    "acceptedAnswers": [
-      {
-        "display": "George Washington",
-        "variants": [
-          "washington",
-          "george washington",
-          "president washington"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "civil-war",
-    "category": "History",
-    "prompt": "Name one war fought by the United States in the 1800s.",
-    "questionAudio": "audio/q/civil-war.m4a",
-    "answerAudio": "audio/a/civil-war.m4a",
-    "answerMode": "any",
-    "acceptedAnswers": [
-      {
-        "display": "Civil War",
-        "variants": ["civil war", "the civil war"]
-      },
-      {
-        "display": "War of 1812",
-        "variants": ["war of 1812", "1812"]
-      },
-      {
-        "display": "Mexican-American War",
-        "variants": ["mexican american war", "mexican-american war"]
-      },
-      {
-        "display": "Spanish-American War",
-        "variants": ["spanish american war", "spanish-american war"]
-      }
-    ]
-  },
-  {
-    "id": "emancipation",
-    "category": "History",
-    "prompt": "What did the Emancipation Proclamation do?",
-    "questionAudio": "audio/q/emancipation.m4a",
-    "answerAudio": "audio/a/emancipation.m4a",
-    "answerMode": "any",
-    "acceptedAnswers": [
-      {
-        "display": "freed the slaves",
-        "variants": [
-          "freed the slaves",
-          "freed slaves",
-          "freed slaves in the confederacy",
-          "freed slaves in most southern states",
-          "emancipated the slaves"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "vice-president",
-    "category": "Government",
-    "prompt": "What is the name of the Vice President of the United States now?",
-    "questionAudio": "audio/q/vice-president.m4a",
-    "answerAudio": "audio/a/vice-president.m4a",
-    "answerMode": "any",
-    "dynamic": true,
-    "notes": "Officeholder-dependent; excluded from Mock Interview by default.",
-    "acceptedAnswers": [
-      {
-        "display": "(current officeholder)",
-        "variants": ["vice president", "the vice president"]
       }
     ]
   }
