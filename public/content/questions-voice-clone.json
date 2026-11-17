@@ -1,0 +1,128 @@
+[
+  {
+    "id": "economic-system",
+    "category": "Government",
+    "prompt": "What is the economic system of the United States?",
+    "questionAudio": "audio/clone/q/economic-system.m4a",
+    "answerAudio": "audio/clone/a/economic-system.m4a",
+    "answerMode": "any",
+    "acceptedAnswers": [
+      { "display": "Capitalism", "variants": ["capitalism", "capitalist", "capitalist economy"] },
+      { "display": "Free market economy", "variants": ["free market economy", "free market", "market economy"] }
+    ]
+  },
+  {
+    "id": "rule-of-law",
+    "category": "Government",
+    "prompt": "What is the rule of law?",
+    "questionAudio": "audio/clone/q/rule-of-law.m4a",
+    "answerAudio": "audio/clone/a/rule-of-law.m4a",
+    "answerMode": "any",
+    "acceptedAnswers": [
+      { "display": "Everyone must follow the law", "variants": ["everyone must follow the law", "everyone follows the law", "everybody must follow the law"] },
+      { "display": "Leaders must obey the law", "variants": ["leaders must obey the law", "leaders obey the law"] },
+      { "display": "Government must obey the law", "variants": ["government must obey the law", "the government must obey the law"] },
+      { "display": "No one is above the law", "variants": ["no one is above the law", "nobody is above the law"] }
+    ]
+  },
+  {
+    "id": "life-liberty-document",
+    "category": "Principles",
+    "prompt": "The words “Life, Liberty, and the pursuit of Happiness” are in what founding document?",
+    "questionAudio": "audio/clone/q/life-liberty-document.m4a",
+    "answerAudio": "audio/clone/a/life-liberty-document.m4a",
+    "answerMode": "any",
+    "acceptedAnswers": [
+      { "display": "Declaration of Independence", "variants": ["declaration of independence", "the declaration of independence", "the declaration"] }
+    ]
+  },
+  {
+    "id": "federalist-writers",
+    "category": "History",
+    "prompt": "The Federalist Papers supported the passage of the U.S. Constitution. Name one of the writers.",
+    "questionAudio": "audio/clone/q/federalist-writers.m4a",
+    "answerAudio": "audio/clone/a/federalist-writers.m4a",
+    "answerMode": "any",
+    "acceptedAnswers": [
+      { "display": "(James) Madison", "variants": ["james madison", "madison"] },
+      { "display": "(Alexander) Hamilton", "variants": ["alexander hamilton", "hamilton"] },
+      { "display": "(John) Jay", "variants": ["john jay", "jay"] },
+      { "display": "Publius", "variants": ["publius"] }
+    ]
+  },
+  {
+    "id": "louisiana-purchase",
+    "category": "History",
+    "prompt": "What territory did the United States buy from France in 1803?",
+    "questionAudio": "audio/clone/q/louisiana-purchase.m4a",
+    "answerAudio": "audio/clone/a/louisiana-purchase.m4a",
+    "answerMode": "any",
+    "acceptedAnswers": [
+      { "display": "Louisiana Territory", "variants": ["louisiana territory", "the louisiana territory", "louisiana", "louisiana purchase"] }
+    ]
+  },
+  {
+    "id": "north-south-war",
+    "category": "History",
+    "prompt": "Name the U.S. war between the North and the South.",
+    "questionAudio": "audio/clone/q/north-south-war.m4a",
+    "answerAudio": "audio/clone/a/north-south-war.m4a",
+    "answerMode": "any",
+    "acceptedAnswers": [
+      { "display": "The Civil War", "variants": ["the civil war", "civil war"] }
+    ]
+  },
+  {
+    "id": "womens-rights-leader",
+    "category": "History",
+    "prompt": "Name one leader of the women’s rights movement in the 1800s.",
+    "questionAudio": "audio/clone/q/womens-rights-leader.m4a",
+    "answerAudio": "audio/clone/a/womens-rights-leader.m4a",
+    "answerMode": "any",
+    "acceptedAnswers": [
+      { "display": "Susan B. Anthony", "variants": ["susan b anthony", "susan anthony", "susan b. anthony"] },
+      { "display": "Elizabeth Cady Stanton", "variants": ["elizabeth cady stanton", "elizabeth stanton"] },
+      { "display": "Sojourner Truth", "variants": ["sojourner truth"] },
+      { "display": "Harriet Tubman", "variants": ["harriet tubman"] },
+      { "display": "Lucretia Mott", "variants": ["lucretia mott"] },
+      { "display": "Lucy Stone", "variants": ["lucy stone"] }
+    ]
+  },
+  {
+    "id": "women-vote",
+    "category": "History",
+    "prompt": "When did all women get the right to vote?",
+    "questionAudio": "audio/clone/q/women-vote.m4a",
+    "answerAudio": "audio/clone/a/women-vote.m4a",
+    "answerMode": "any",
+    "acceptedAnswers": [
+      { "display": "1920", "variants": ["1920", "nineteen twenty", "in 1920"] },
+      { "display": "After World War I", "variants": ["after world war i", "after world war one", "after the first world war"] },
+      { "display": "(With the) 19th Amendment", "variants": ["19th amendment", "the 19th amendment", "with the 19th amendment", "nineteenth amendment"] }
+    ]
+  },
+  {
+    "id": "depression-president",
+    "category": "History",
+    "prompt": "Who was president during the Great Depression and World War II?",
+    "questionAudio": "audio/clone/q/depression-president.m4a",
+    "answerAudio": "audio/clone/a/depression-president.m4a",
+    "answerMode": "any",
+    "acceptedAnswers": [
+      { "display": "(Franklin) Roosevelt", "variants": ["franklin roosevelt", "franklin d roosevelt", "roosevelt", "fdr"] }
+    ]
+  },
+  {
+    "id": "cold-war-rival",
+    "category": "History",
+    "prompt": "Who was the United States’ main rival during the Cold War?",
+    "questionAudio": "audio/clone/q/cold-war-rival.m4a",
+    "answerAudio": "audio/clone/a/cold-war-rival.m4a",
+    "answerMode": "any",
+    "acceptedAnswers": [
+      { "display": "Soviet Union", "variants": ["soviet union", "the soviet union", "soviets"] },
+      { "display": "USSR", "variants": ["ussr", "u s s r"] },
+      { "display": "Russia", "variants": ["russia"] }
+    ]
+  }
+]

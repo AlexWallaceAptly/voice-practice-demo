@@ -1,5 +1,6 @@
 import { Link, Outlet, useLocation } from 'react-router-dom'
-import { isOfflineReady } from '../lib/storage'
+import { QUESTION_SETS } from '../config'
+import { isOfflineReady, loadQuestionSet } from '../lib/storage'
 import { useDevMode } from '../hooks/useDevMode'
 import { useOnlineStatus } from '../hooks/useOnlineStatus'
 
@@ -9,6 +10,7 @@ export function Layout() {
   // Re-read when the route changes (e.g. after Setup completes)
   useLocation()
   const offlineReady = isOfflineReady()
+  const questionSet = QUESTION_SETS.find((s) => s.id === loadQuestionSet())
 
   return (
     <div className="min-h-screen bg-slate-100 text-slate-900">
@@ -32,6 +34,11 @@ export function Layout() {
               />
               {online ? 'Online' : 'Offline'}
             </span>
+            {questionSet && (
+              <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-700">
+                {questionSet.label}
+              </span>
+            )}
             {offlineReady && (
               <span className="rounded-full bg-sky-50 px-2.5 py-0.5 text-xs font-medium text-sky-800">
                 Offline-ready

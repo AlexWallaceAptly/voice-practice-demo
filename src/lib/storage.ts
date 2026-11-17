@@ -1,4 +1,4 @@
-import { STORAGE_KEYS } from '../config'
+import { QUESTION_SETS, STORAGE_KEYS, type QuestionSetId } from '../config'
 import type { Attempt, FeedbackEntry, ReviewEvent } from '../core/types'
 
 function readJson<T>(key: string, fallback: T): T {
@@ -66,4 +66,14 @@ export function clearLocalData(): void {
   localStorage.removeItem(STORAGE_KEYS.feedback)
   localStorage.removeItem(STORAGE_KEYS.attempts)
   localStorage.removeItem(STORAGE_KEYS.reviewEvents)
+}
+
+export function loadQuestionSet(): QuestionSetId {
+  const saved = localStorage.getItem(STORAGE_KEYS.questionSet)
+  const match = QUESTION_SETS.find((s) => s.id === saved)
+  return match ? match.id : 'studio'
+}
+
+export function saveQuestionSet(id: QuestionSetId): void {
+  localStorage.setItem(STORAGE_KEYS.questionSet, id)
 }

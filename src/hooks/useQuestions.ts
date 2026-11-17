@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
+import { QUESTION_SETS } from '../config'
 import { loadQuestions } from '../content/loadQuestions'
 import type { Question } from '../core/types'
+import { assetUrl } from '../lib/assetUrl'
+import { loadQuestionSet } from '../lib/storage'
 
 export function useQuestions(): {
   questions: Question[]
@@ -13,7 +16,8 @@ export function useQuestions(): {
 
   useEffect(() => {
     let cancelled = false
-    void loadQuestions()
+    const set = QUESTION_SETS.find((s) => s.id === loadQuestionSet())
+    void loadQuestions(set ? assetUrl(set.file) : undefined)
       .then((q) => {
         if (!cancelled) {
           setQuestions(q)

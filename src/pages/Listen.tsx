@@ -307,6 +307,18 @@ export function Listen() {
                   ? 'Playing answer'
                   : 'Ready'}
           </p>
+          {phase === 'answer' && showText && (
+            <div className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 p-4">
+              <p className="m-0 text-xs font-medium uppercase tracking-wide text-emerald-800">
+                Answer
+              </p>
+              <ul className="mt-2 mb-0 list-disc pl-5 text-base text-emerald-950">
+                {current.acceptedAnswers.map((a) => (
+                  <li key={a.display}>{a.display}</li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       )}
 

@@ -149,7 +149,7 @@ export function createChromeOnDeviceEngine(): SpeechEngine {
         const recognition = new Ctor()
         active = recognition
         recognition.lang = 'en-US'
-        recognition.continuous = false
+        recognition.continuous = opts.manualStop === true
         recognition.interimResults = true
         recognition.maxAlternatives = 3
         recognition.processLocally = true
@@ -172,7 +172,7 @@ export function createChromeOnDeviceEngine(): SpeechEngine {
         }, opts.maxMs)
 
         const noSpeechTimer = window.setTimeout(() => {
-          if (!speechHeard) {
+          if (!speechHeard && !opts.manualStop) {
             recognition.abort()
             cleanup()
             resolve({
@@ -198,13 +198,18 @@ export function createChromeOnDeviceEngine(): SpeechEngine {
 
         recognition.onresult = (ev) => {
           speechHeard = true
+          const finals: string[] = []
+          for (let i = 0; i < ev.results.length; i++) {
+            const best = ev.results[i]?.[0]
+            if (ev.results[i]?.isFinal && best) finals.push(best.transcript.trim())
+          }
+          finalTranscript = finals.join(' ')
           for (let i = ev.resultIndex; i < ev.results.length; i++) {
             const result = ev.results[i]
             if (!result) continue
             if (result.isFinal) {
               const best = result[0]
               if (best) {
-                finalTranscript = best.transcript.trim()
                 confidence = best.confidence
               }
               alternatives.length = 0
@@ -264,6 +269,14 @@ export function createChromeOnDeviceEngine(): SpeechEngine {
           reject(err instanceof Error ? err : new Error(String(err)))
         }
       })
+    },
+
+    stop(): void {
+      try {
+        active?.stop()
+      } catch {
+        return
+      }
     },
 
     cancel(): void {

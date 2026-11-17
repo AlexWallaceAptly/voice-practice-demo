@@ -7,7 +7,7 @@ import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
-const questionsPath = join(root, 'public/content/questions.json')
+const questionFiles = ['questions.json', 'questions-voice-clone.json']
 
 interface QuestionRow {
   id: string
@@ -15,8 +15,12 @@ interface QuestionRow {
   answerAudio: string
 }
 
-const raw = readFileSync(questionsPath, 'utf8')
-const questions = JSON.parse(raw) as QuestionRow[]
+const questions = questionFiles.flatMap(
+  (f) =>
+    JSON.parse(
+      readFileSync(join(root, 'public/content', f), 'utf8'),
+    ) as QuestionRow[],
+)
 
 let missing = 0
 for (const q of questions) {

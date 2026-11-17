@@ -16,6 +16,7 @@ export const MAX_THINK_GAP_SEC = 8
 
 export const LISTEN_MAX_MS = 15_000
 export const LISTEN_NO_SPEECH_MS = 8_000
+export const MANUAL_LISTEN_MAX_MS = 30_000
 
 /** Whisper model id; switch to tiny.en if base is too slow. */
 export const WHISPER_MODEL = 'onnx-community/whisper-base'
@@ -29,7 +30,25 @@ export const STORAGE_KEYS = {
   reviewEvents: 'voice-demo-review-events',
   offlineReady: 'voice-demo-offline-ready',
   preferredEngine: 'voice-demo-preferred-engine',
+  questionSet: 'voice-demo-question-set',
 } as const
 
 export const FEEDBACK_FORM_URL =
   (import.meta.env.VITE_FEEDBACK_FORM_URL as string | undefined) ?? ''
+
+export const QUESTION_SETS = [
+  {
+    id: 'studio',
+    label: 'Studio recordings',
+    blurb: '7 questions read by our voice actor.',
+    file: 'content/questions.json',
+  },
+  {
+    id: 'voice-clone',
+    label: 'AI voice clone',
+    blurb: '10 national questions generated from a 90-second sample of the same voice.',
+    file: 'content/questions-voice-clone.json',
+  },
+] as const
+
+export type QuestionSetId = (typeof QUESTION_SETS)[number]['id']

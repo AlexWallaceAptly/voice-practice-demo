@@ -101,11 +101,18 @@ self.onmessage = async (ev: MessageEvent) => {
       }
       const run = transcriber as unknown as (
         audio: Float32Array,
-        options: { language: string; task: string },
+        options: {
+          language: string
+          task: string
+          max_new_tokens: number
+          no_repeat_ngram_size: number
+        },
       ) => Promise<{ text?: string }>
       const result = await run(msg.audio, {
         language: 'english',
         task: 'transcribe',
+        max_new_tokens: 64,
+        no_repeat_ngram_size: 3,
       })
       const processMs = Math.round(performance.now() - processStarted)
       self.postMessage({

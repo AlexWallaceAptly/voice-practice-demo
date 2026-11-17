@@ -7,6 +7,7 @@ export interface ListenOptions {
   maxMs: number
   /** Give up if nothing heard, default 8000 */
   noSpeechMs: number
+  manualStop?: boolean
 }
 
 export interface ListenResult {
@@ -26,5 +27,6 @@ export interface SpeechEngine {
   /** Download model or language pack */
   prepare(onProgress: (pct: number, note?: string) => void): Promise<void>
   listen(opts: ListenOptions): Promise<ListenResult>
+  stop(): void
   cancel(): void
 }

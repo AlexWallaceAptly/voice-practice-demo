@@ -29,12 +29,15 @@ function pickMimeType(): string | undefined {
   return undefined
 }
 
-/**
- * Open the mic, return a live level meter and a stop() that yields a Blob.
- */
-export async function startRecorder(
+export interface MicMeter {
+  stream: MediaStream
+  getLevel: () => RecorderLevel
+  close: () => void
+}
+
+export async function openMicMeter(
   onLevel?: (level: RecorderLevel) => void,
-): Promise<RecorderHandle> {
+): Promise<MicMeter> {
   const stream = await navigator.mediaDevices.getUserMedia({
     audio: {
       channelCount: 1,
@@ -67,6 +70,27 @@ export async function startRecorder(
   }
   raf = requestAnimationFrame(tick)
 
+  return {
+    stream,
+    getLevel: () => level,
+    close: () => {
+      cancelAnimationFrame(raf)
+      source.disconnect()
+      void audioCtx.close()
+      for (const track of stream.getTracks()) track.stop()
+    },
+  }
+}
+
+/**
+ * Open the mic, return a live level meter and a stop() that yields a Blob.
+ */
+export async function startRecorder(
+  onLevel?: (level: RecorderLevel) => void,
+): Promise<RecorderHandle> {
+  const meter = await openMicMeter(onLevel)
+  const { stream } = meter
+
   const mimeType = pickMimeType()
   const recorder = new MediaRecorder(
     stream,
@@ -78,16 +102,11 @@ export async function startRecorder(
   }
   recorder.start(100)
 
-  const cleanup = () => {
-    cancelAnimationFrame(raf)
-    source.disconnect()
-    void audioCtx.close()
-    for (const track of stream.getTracks()) track.stop()
-  }
+  const cleanup = meter.close
 
   return {
     stream,
-    getLevel: () => level,
+    getLevel: meter.getLevel,
     cancel: () => {
       try {
         if (recorder.state !== 'inactive') recorder.stop()

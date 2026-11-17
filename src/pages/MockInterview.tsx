@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
   INCLUDE_DYNAMIC_IN_SIM,
-  LISTEN_MAX_MS,
   LISTEN_NO_SPEECH_MS,
+  MANUAL_LISTEN_MAX_MS,
   SIM_PASS_PERCENT,
   SIM_QUESTION_COUNT,
 } from '../config'
@@ -11,6 +11,7 @@ import { AudioPlayer, playQuestionOrPlaceholder } from '../audio/player'
 import { BackLink } from '../components/BackLink'
 import { DevEnginePanel } from '../components/DevEnginePanel'
 import { FeedbackPrompt } from '../components/FeedbackPrompt'
+import { LevelMeter } from '../components/LevelMeter'
 import {
   createInitialSessionState,
   isCorrect,
@@ -21,6 +22,7 @@ import {
 } from '../core/session'
 import type { Question } from '../core/types'
 import { resolveDefaultEngine, type SpeechEngine } from '../engines'
+import { openMicMeter } from '../engines/recorder'
 import { useDevMode } from '../hooks/useDevMode'
 import { useQuestions } from '../hooks/useQuestions'
 import { appendAttempts, isOfflineReady } from '../lib/storage'
@@ -36,6 +38,8 @@ export function MockInterview() {
   const [engineLabel, setEngineLabel] = useState('')
   const [engineReady, setEngineReady] = useState<boolean | null>(null)
   const [busy, setBusy] = useState(false)
+  const [micOpen, setMicOpen] = useState(false)
+  const [micLevel, setMicLevel] = useState(0)
   const [placeholder, setPlaceholder] = useState(false)
   const [lastListenMs, setLastListenMs] = useState<number>()
   const [lastProcessMs, setLastProcessMs] = useState<number>()
@@ -82,6 +86,23 @@ export function MockInterview() {
       engineRef.current?.cancel()
     }
   }, [])
+
+  useEffect(() => {
+    if (!micOpen) return
+    let closed = false
+    let close: (() => void) | null = null
+    void openMicMeter((l) => setMicLevel(l.level))
+      .then((meter) => {
+        if (closed) meter.close()
+        else close = meter.close
+      })
+      .catch(() => undefined)
+    return () => {
+      closed = true
+      close?.()
+      setMicLevel(0)
+    }
+  }, [micOpen])
 
   useEffect(() => {
     if (state.phase === 'SUMMARY' && !loggedRef.current) {
@@ -132,35 +153,50 @@ export function MockInterview() {
         q.prompt,
         () => setPlaceholder(true),
       )
-      let next = reduceSession(s, { type: 'QUESTION_PLAY_ENDED' })
-      setState(next)
-
-      const phrases = q.acceptedAnswers.flatMap((a) => a.variants)
-      const result = await engine.listen({
-        phrases,
-        maxMs: LISTEN_MAX_MS,
-        noSpeechMs: LISTEN_NO_SPEECH_MS,
-      })
-      setLastListenMs(result.listenMs)
-      setLastProcessMs(result.processMs)
-
-      next = reduceSession(
-        next,
-        {
-          type: 'LISTEN_RESULT',
-          transcript: result.transcript,
-          alternatives: result.alternatives,
-          noSpeech: result.noSpeech,
-          listenMs: result.listenMs,
-          processMs: result.processMs,
-        },
-        q,
-      )
-      setState(next)
+      setState(reduceSession(s, { type: 'QUESTION_PLAY_ENDED' }))
     } catch (e) {
       setErr(e instanceof Error ? e.message : String(e))
     } finally {
       setBusy(false)
+    }
+  }
+
+  const onMicTap = async () => {
+    const engine = engineRef.current
+    if (!current || !engine) return
+    if (micOpen) {
+      engine.stop()
+      return
+    }
+    setErr(null)
+    setMicOpen(true)
+    try {
+      const result = await engine.listen({
+        phrases: current.acceptedAnswers.flatMap((a) => a.variants),
+        maxMs: MANUAL_LISTEN_MAX_MS,
+        noSpeechMs: LISTEN_NO_SPEECH_MS,
+        manualStop: true,
+      })
+      setLastListenMs(result.listenMs)
+      setLastProcessMs(result.processMs)
+      setState((prev) =>
+        reduceSession(
+          prev,
+          {
+            type: 'LISTEN_RESULT',
+            transcript: result.transcript,
+            alternatives: result.alternatives,
+            noSpeech: result.noSpeech,
+            listenMs: result.listenMs,
+            processMs: result.processMs,
+          },
+          current,
+        ),
+      )
+    } catch (e) {
+      setErr(e instanceof Error ? e.message : String(e))
+    } finally {
+      setMicOpen(false)
     }
   }
 
@@ -250,9 +286,15 @@ export function MockInterview() {
             <p className="mt-2 text-xl font-semibold">{current.prompt}</p>
             <p className="mt-3 text-sm text-slate-500">
               {state.phase === 'PLAYING_QUESTION' && 'Playing question…'}
-              {state.phase === 'LISTENING' && 'Listening — say your answer'}
               {state.phase === 'PROCESSING' && 'Processing…'}
             </p>
+            {state.phase === 'LISTENING' && (
+              <MicButton
+                open={micOpen}
+                level={micLevel}
+                onTap={() => void onMicTap()}
+              />
+            )}
           </div>
         )}
 
@@ -373,6 +415,39 @@ export function MockInterview() {
           processMs={lastProcessMs}
         />
       )}
+    </div>
+  )
+}
+
+function MicButton({
+  open,
+  level,
+  onTap,
+}: {
+  open: boolean
+  level: number
+  onTap: () => void
+}) {
+  return (
+    <div className="mt-4 flex items-center gap-3">
+      <button
+        type="button"
+        onClick={onTap}
+        aria-label={open ? 'Stop recording' : 'Start recording'}
+        className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-white shadow-sm transition ${
+          open ? 'bg-rose-600 hover:bg-rose-700' : 'bg-sky-700 hover:bg-sky-800'
+        }`}
+      >
+        <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
+          <path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3Zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11h-2Z" />
+        </svg>
+      </button>
+      <div className="flex-1 space-y-1">
+        <p className="m-0 text-sm text-slate-600">
+          {open ? 'Listening… tap to finish' : 'Tap the mic to answer'}
+        </p>
+        {open && <LevelMeter level={level} />}
+      </div>
     </div>
   )
 }

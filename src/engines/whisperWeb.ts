@@ -53,6 +53,7 @@ export function createWhisperWebEngine(): SpeechEngine {
   let prepared = false
   let recorder: RecorderHandle | null = null
   let cancelled = false
+  let finishNow: (() => void) | null = null
 
   const ensureWorker = () => {
     if (!worker) {
@@ -116,7 +117,7 @@ export function createWhisperWebEngine(): SpeechEngine {
         }, maxMs)
 
         const noSpeechCap = window.setTimeout(() => {
-          if (!speechStarted) {
+          if (!speechStarted && !opts.manualStop) {
             finish(true)
           }
         }, noSpeechMs)
@@ -128,6 +129,7 @@ export function createWhisperWebEngine(): SpeechEngine {
             speechStarted = true
             lastLoudAt = performance.now()
           } else if (
+            !opts.manualStop &&
             speechStarted &&
             performance.now() - lastLoudAt >= WHISPER_END_SILENCE_MS
           ) {
@@ -135,9 +137,12 @@ export function createWhisperWebEngine(): SpeechEngine {
           }
         }, 50)
 
+        finishNow = () => void finish()
+
         async function finish(asNoSpeech = false) {
           if (stopped) return
           stopped = true
+          finishNow = null
           window.clearTimeout(hardCap)
           window.clearTimeout(noSpeechCap)
           window.clearInterval(poll)
@@ -216,6 +221,10 @@ export function createWhisperWebEngine(): SpeechEngine {
         processMs: result.processMs,
         engineId: 'whisper-web',
       }
+    },
+
+    stop(): void {
+      finishNow?.()
     },
 
     cancel(): void {

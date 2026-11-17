@@ -1,6 +1,11 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { SIM_PASS_PERCENT, SIM_QUESTION_COUNT } from '../config'
-import { isOfflineReady } from '../lib/storage'
+import {
+  QUESTION_SETS,
+  SIM_PASS_PERCENT,
+  SIM_QUESTION_COUNT,
+} from '../config'
+import { isOfflineReady, loadQuestionSet, saveQuestionSet } from '../lib/storage'
 
 const options = [
   {
@@ -28,6 +33,7 @@ const options = [
 
 export function Home() {
   const offlineReady = isOfflineReady()
+  const [questionSet, setQuestionSet] = useState(loadQuestionSet)
 
   return (
     <div className="space-y-6">
@@ -63,6 +69,36 @@ export function Home() {
           and audio work with the network off.
         </p>
       )}
+
+      <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+        <h2 className="m-0 text-base font-semibold">Question set</h2>
+        <div className="mt-3 grid gap-2 sm:grid-cols-2">
+          {QUESTION_SETS.map((set) => (
+            <label
+              key={set.id}
+              className={`flex cursor-pointer gap-3 rounded-xl border p-3 text-sm ${
+                questionSet === set.id
+                  ? 'border-sky-400 bg-sky-50'
+                  : 'border-slate-200 bg-white'
+              }`}
+            >
+              <input
+                type="radio"
+                name="question-set"
+                checked={questionSet === set.id}
+                onChange={() => {
+                  saveQuestionSet(set.id)
+                  setQuestionSet(set.id)
+                }}
+              />
+              <span>
+                <span className="block font-medium">{set.label}</span>
+                <span className="block text-slate-600">{set.blurb}</span>
+              </span>
+            </label>
+          ))}
+        </div>
+      </section>
 
       <div className="grid gap-4 sm:grid-cols-1">
         {options.map((opt) => (
